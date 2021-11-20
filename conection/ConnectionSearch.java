@@ -9,9 +9,11 @@ public class ConnectionSearch {
         this.stops = stops;
     }
 
-    /*
+
     public ConnectionData search(StopName from, StopName to, Time time){
-        return cd;
+        stops.setStartingStop(from, time);
+        stops.getLines(from);
+        return null;
     }
-    */
+
 }

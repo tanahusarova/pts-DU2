@@ -6,4 +6,5 @@ public class Time {
     public Time(Integer time) {
         this.time = time;
     }
+
 }
