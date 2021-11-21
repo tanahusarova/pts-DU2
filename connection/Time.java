@@ -1,4 +1,4 @@
-package conection;
+package connection;
 
 public class Time {
     Integer time;

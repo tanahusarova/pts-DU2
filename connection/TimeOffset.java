@@ -1,4 +1,4 @@
-package conection;
+package connection;
 
 public class TimeOffset extends Time{
 

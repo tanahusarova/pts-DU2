@@ -1,10 +1,10 @@
-package conection;
+package connection;
 
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Vector;
 
-public class Stop {
+public class Stop implements StopInterface{
     private StopName stopName;
     private Optional<Time> reachableAt;
     private Optional<LineName> reachableVia;

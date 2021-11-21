@@ -1,4 +1,4 @@
-package conection;
+package connection;
 
 import java.util.Vector;
 
@@ -11,5 +11,13 @@ public class Line {
         this.lineName = lineName;
         this.startingTimes = startingTimes;
         this.firstStop = firstStop;
+    }
+
+    public Line(LineName lineName) {
+        this.lineName = lineName;
+    }
+
+    public LineName getName(){
+        return lineName;
     }
 }
