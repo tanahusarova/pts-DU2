@@ -1,14 +1,23 @@
 package connection;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Vector;
+import java.util.logging.FileHandler;
 
 public class StopDatabase implements StopInterface{
     private StopName name;
+    private String fileName;
+    private FileReader fileReader;
+    private Optional<Time> reachableAt;
+    private Optional<LineName> reachableVia;
+    private Vector<LineName> lines;
 
-    public StopDatabase(StopName stopName) {
+
+    public StopDatabase(StopName stopName, String fileName) {
         this.name = stopName;
+        this.fileName = fileName;
     }
 
     @Override
@@ -17,7 +26,7 @@ public class StopDatabase implements StopInterface{
     }
 
     @Override
-    public HashMap<Time, LineName> getReachableAt() {
+    public Optional<Time> getReachableAt() {
         return null;
     }
 

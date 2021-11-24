@@ -7,17 +7,17 @@ public class Stops {
     private Set<StopInterface> stops;
     private Factory factory;
 
-
+/*
     public Stops(String fileName) {
         this.stopNames = new HashSet<>();
         this.stops = new HashSet<>();
-        factory = new FactoryDatabase();
+        factory = new FactoryDatabase(fileName);
     }
 
-    public Stops() {
-        this.stopNames = new HashSet<>();
-        this.stops = new HashSet<>();
-        factory = new FactoryInMemory();
+ */
+
+    public Stops(Factory factory) {
+        this.factory = factory;
     }
 
     public void setStops(Set<StopInterface> stops){
@@ -51,7 +51,7 @@ public class Stops {
 
         else stop = getStop(stopName);
 
-        stop.updateReachableAt(new Time(1), null);
+        stop.updateReachableAt(time, null);
         return true;
     }
 
@@ -64,5 +64,18 @@ public class Stops {
         return null;
     }
 
+    public Pair<StopName, Time> earliestReachableAfter(Time time){
+        Time earliest = new Time(time.time);
+        StopName stopName = new StopName(null);
+        for (StopInterface s : stops){
+            if (s.getReachableAt().isPresent() && s.getReachableAt().get().time >= time.time
+                    && s.getReachableAt().get().time <= earliest.time){
+
+                stopName = s.getName();
+                earliest = s.getReachableAt().get();
+            }
+        }
+        return new Pair<>(stopName, earliest);
+    }
 
 }

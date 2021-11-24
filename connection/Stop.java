@@ -15,11 +15,13 @@ public class Stop implements StopInterface{
     }
 
     public void updateReachableAt(Time time, Optional<LineName> line){
-        reachableAt = Optional.of(time);
-        reachableVia = line;
+        if (time.time < reachableAt.get().time) {
+            reachableAt = Optional.of(time);
+            reachableVia = line;
+        }
     }
 
-    public HashMap<Time, LineName> getReachableAt(){
+    public Optional<Time> getReachableAt(){
         return null;
     }
 

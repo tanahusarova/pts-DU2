@@ -6,6 +6,9 @@ import java.util.Vector;
 
 public class StopInMemory implements StopInterface{
     private StopName name;
+    private Optional<Time> reachableAt;
+    private Optional<LineName> reachableVia;
+    private Vector<LineName> lines;
 
     public StopInMemory(StopName stopName) {
         name = stopName;
@@ -17,8 +20,8 @@ public class StopInMemory implements StopInterface{
     }
 
     @Override
-    public HashMap<Time, LineName> getReachableAt() {
-        return null;
+    public Optional<Time> getReachableAt() {
+        return reachableAt;
     }
 
     @Override
@@ -30,4 +33,5 @@ public class StopInMemory implements StopInterface{
     public StopName getName() {
         return name;
     }
+
 }

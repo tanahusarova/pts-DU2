@@ -9,17 +9,19 @@ public class Lines {
     private Set<LineName> lineNames;
     private Factory factory;
 
-    public Lines() {
+    public Lines(Factory factory) {
         this.lines = new HashSet<>();
         this.lineNames = new HashSet<>();
-        factory = new FactoryInMemory();
+        this.factory = factory;
     }
-
+/*
     public Lines(String fileName) {
         this.lines = new HashSet<>();
         this.lineNames = new HashSet<>();
-        factory = new FactoryDatabase();
+        factory = new FactoryDatabase(fileName);
     }
+
+ */
 
     public void setLines(Set<LineInterface> lines){
         this.lines.clear();
@@ -40,11 +42,32 @@ public class Lines {
 
     public void updateReachable(Vector<LineName> lines, StopName stop, Time time){
 
+        for (LineName l : lines) {
+            LineInterface line = null;
+            if (!lineNames.contains(l)) {
+                line = factory.createLine(l);
+                this.lines.add(line);
+                this.lineNames.add(l);
+            }
+
+            else line = getLine(l);
+            line.updateReachable(stop, time);
+        }
+
+        return;
 
     }
 
     public StopName updateCapacityAndGetPreviousStop(LineName line, StopName stop, Time time){
-        return null;
+        LineInterface tmpLine = null;
+        for (LineInterface l : lines){
+            if (l.getName() == line){
+                tmpLine = l;
+                break;
+            }
+        }
+        return tmpLine.updateCapacityAndGetPreviousStop(stop, time);
+
     }
 
     public void clean(){

@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public interface StopInterface {
     void updateReachableAt(Time time, Optional<LineName> line);
-    HashMap<Time, LineName> getReachableAt();
+    Optional<Time> getReachableAt();
     Vector<LineName> getLines();
     StopName getName();
 }

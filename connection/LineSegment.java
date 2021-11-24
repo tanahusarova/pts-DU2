@@ -2,10 +2,11 @@ package connection;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class LineSegment {
 //    private StopName from;
-    private Stop nextStop;
+    private StopInterface nextStop;
     private TimeOffset timeToNextStop;
     private int capacity;
     private LineName lineName;
@@ -20,4 +21,24 @@ public class LineSegment {
     }
 
 
+    public Pair<Time, StopName> nextStop(Time time){
+        return new Pair(new Time(time.time + timeToNextStop.time), nextStop.getName());
+    }
+
+    public Tuple<Time, StopName, Boolean> nextStopAndUpdateReachable(Time time){
+        Boolean tmp = numberOfPasengers.get(time) < capacity;
+
+        if (tmp == true) nextStop.updateReachableAt(new Time(time.time + timeToNextStop.time), Optional.ofNullable(lineName));
+
+        return new Tuple<>(new Time(time.time + timeToNextStop.time), nextStop.getName(), tmp);
+
+    }
+
+    public StopInterface getNextStop() {
+        return nextStop;
+    }
+
+    public void incrementCapacity(Time time){
+        numberOfPasengers.put(time, numberOfPasengers.get(time) + 1);
+    }
 }

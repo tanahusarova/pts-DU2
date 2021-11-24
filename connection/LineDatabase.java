@@ -4,8 +4,11 @@ import java.util.Vector;
 
 public class LineDatabase implements LineInterface{
     private LineName name;
-    public LineDatabase(LineName name) {
+    private String fileName;
+
+    public LineDatabase(LineName name, String fileName) {
         this.name = name;
+        this.fileName = fileName;
     }
 
     @Override
@@ -14,7 +17,7 @@ public class LineDatabase implements LineInterface{
     }
 
     @Override
-    public void updateReachable(Vector<LineName> lines, StopName stop, Time time) {
+    public void updateReachable(StopName stop, Time time) {
 
     }
 
