@@ -28,7 +28,7 @@ public class LineSegment {
     public Tuple<Time, StopName, Boolean> nextStopAndUpdateReachable(Time time){
         Boolean tmp = numberOfPasengers.get(time) < capacity;
 
-        if (tmp == true) nextStop.updateReachableAt(new Time(time.time + timeToNextStop.time), Optional.ofNullable(lineName));
+        if (tmp == true) nextStop.updateReachableAt(new Time(time.time + timeToNextStop.time), lineName);
 
         return new Tuple<>(new Time(time.time + timeToNextStop.time), nextStop.getName(), tmp);
 

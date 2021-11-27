@@ -7,8 +7,6 @@ public class Stops {
     private Set<StopName> stopNames;
     private Set<StopInterface> stops;
     private Factory factory;
-    private Queue<Pair> earliestReachableAfter;
-    private boolean generateNew;
 
 /*
     public Stops(String fileName) {
@@ -19,11 +17,15 @@ public class Stops {
 
  */
 
-    public Stops(Factory factory) {
+    public Stops(Set<StopName> stopNames, Set<StopInterface> stops) {
+        this.stopNames = stopNames;
+        this.stops = stops;
+    }
 
+    public Stops(Factory factory) {
+        stopNames = new HashSet<>();
+        stops = new HashSet<>();
         this.factory = factory;
-        generateNew = true;
-        this.earliestReachableAfter = new LinkedList<>();
 
     }
 
@@ -38,26 +40,25 @@ public class Stops {
 
     private StopInterface getStop(StopName stopName){
         StopInterface stop = null;
-        for (StopInterface s : stops){
-            if (s.getName() == stopName) {
-                stop = s;
-                break;
+        if (!stopNames.contains(stopName)) {
+            stop = factory.createStop(stopName);
+            stops.add(stop);
+            stopNames.add(stopName);
+        }
+        else {
+            for (StopInterface s : stops) {
+                if (s.getName() == stopName) {
+                    stop = s;
+                    break;
+                }
             }
         }
         return stop;
     }
 
     public boolean setStartingStop(StopName stopName, Time time){
-        StopInterface stop = null;
 
-        if (!stopNames.contains(stopName)) {
-            stop = factory.createStop(stopName);
-            stops.add(stop);
-            stopNames.add(stopName);
-        }
-
-        else stop = getStop(stopName);
-
+        StopInterface stop = getStop(stopName);
         stop.updateReachableAt(time, null);
         return true;
     }
@@ -67,10 +68,12 @@ public class Stops {
         return stop.getLines();
     }
 
-    public Map<Time, LineName> getReachableAt(StopName stop){
-        return null;
+    public Pair<Time, LineName> getReachableAt(StopName stop){
+        StopInterface tmpStop = getStop(stop);
+        return new Pair(tmpStop.getReachableAt(), tmpStop.getReachableVia());
     }
 
+    /*
     private void search(Time time){
         this.earliestReachableAfter.clear();
         Set<StopName> used = new HashSet<>();
@@ -92,24 +95,38 @@ public class Stops {
         }
     }
 
+     */
 
-    public Pair<StopName, Time> earliestReachableAfter(Time time){
-        if (generateNew) search(time);
-        Time earliest = new Time(time.time);
-        StopName stopName = new StopName(null);
-        for (StopInterface s : stops){
-            if (s.getReachableAt().isPresent() && s.getReachableAt().get().time >= time.time
-                    && s.getReachableAt().get().time <= earliest.time){
 
-                stopName = s.getName();
-                earliest = s.getReachableAt().get();
+    public List<StopInterface> earliestReachableAfter(Time time, int count) {
+        Time earliest = null;
+        StopInterface tmpStop = null;
+        List result = new ArrayList();
+
+        for (int i = 0; i < count; i++) {
+            for (StopInterface s : stops) {
+                if ((earliest == null || (s.getReachableAt().isPresent()
+                        && s.getReachableAt().get().time >= time.time
+                        && s.getReachableAt().get().time <= earliest.time))
+                        && !result.contains(s)) {
+
+                    tmpStop = s;
+                    earliest = s.getReachableAt().get();
+                }
             }
+            result.add(tmpStop);
+            tmpStop = null;
+            earliest = null;
         }
-        return new Pair<>(stopName, earliest);
+
+        return result;
+
     }
 
-    public void setGenerateNew(){
-        generateNew = true;
+    public void clean(){
+        for (StopInterface s: stops){
+            s.updateReachableAt(null, null);
+        }
     }
 
 }

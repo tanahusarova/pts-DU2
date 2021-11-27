@@ -14,14 +14,9 @@ public class Lines {
         this.lineNames = new HashSet<>();
         this.factory = factory;
     }
-/*
-    public Lines(String fileName) {
-        this.lines = new HashSet<>();
-        this.lineNames = new HashSet<>();
-        factory = new FactoryDatabase(fileName);
-    }
 
- */
+
+ /*
 
     public void setLines(Set<LineInterface> lines){
         this.lines.clear();
@@ -32,10 +27,19 @@ public class Lines {
         }
     }
 
+  */
+
     private LineInterface getLine(LineName lineName){
         LineInterface line = null;
-        for (LineInterface l : lines){
-            if (l.getName() == lineName) line = l;
+        if (!lineNames.contains(lineName)) {
+            line = factory.createLine(lineName);
+            this.lines.add(line);
+            this.lineNames.add(lineName);
+        }
+        else {
+            for (LineInterface l : lines) {
+                if (l.getName() == lineName) line = l;
+            }
         }
         return line;
     }
@@ -43,14 +47,7 @@ public class Lines {
     public void updateReachable(Vector<LineName> lines, StopName stop, Time time){
 
         for (LineName l : lines) {
-            LineInterface line = null;
-            if (!lineNames.contains(l)) {
-                line = factory.createLine(l);
-                this.lines.add(line);
-                this.lineNames.add(l);
-            }
-
-            else line = getLine(l);
+            LineInterface line = getLine(l);
             line.updateReachable(stop, time);
         }
 
@@ -70,6 +67,7 @@ public class Lines {
 
     }
 
+ //not sure
     public void clean(){
         lines.clear();
         lineNames.clear();

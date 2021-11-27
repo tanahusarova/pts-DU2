@@ -1,21 +1,41 @@
 package connection;
 
+import javax.net.ssl.ExtendedSSLSession;
 import java.sql.Connection;
+//import org.hibernate.Session;
 
-public class LineDatabase implements LineInterface{
-    private LineName name;
+
+public class LineDatabase extends Line{
+ //   private Session connection;
     private Connection connection;
 
+
     public LineDatabase(Connection connection, LineName lineName) {
+        super(lineName);
         this.connection = connection;
-        this.name = lineName;
-    }
+        /* startingTimes
 
-    private
+        SELECT lineStartTime
+        FROM lines
+        WHERE lineName = (this.name)
+        ORDER BY 1;
 
-    @Override
-    public LineName getName() {
-        return name;
+        firstStop
+
+        SELECT lineStartStop
+        FROM lines
+        WHERE lineName = (this.name)
+
+        lineSegments
+
+        SELECT stopTimeDiff, stopName
+        FROM lines
+        JOIN linesStops ON lines.lineId = linesStops.lineId
+        WHERE lineName = (this.name)
+        ORDER BY stopOrder;
+
+
+         */
     }
 
     @Override
@@ -27,4 +47,10 @@ public class LineDatabase implements LineInterface{
     public StopName updateCapacityAndGetPreviousStop(StopName stop, Time time) {
         return null;
     }
+
+   /* private void readLine(){
+        SQLQuery sqlQuery = new connection.create
+    }
+
+    */
 }

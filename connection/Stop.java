@@ -5,32 +5,48 @@ import java.util.Optional;
 import java.util.Vector;
 
 public class Stop implements StopInterface{
-    private StopName stopName;
-    private Optional<Time> reachableAt;
-    private Optional<LineName> reachableVia;
-    private Vector<LineName> lines;
+    protected StopName stopName;
+    protected Optional<Time> reachableAt;
+    protected Optional<LineName> reachableVia;
+    protected Vector<LineName> lines;
 
     public Stop(StopName stopName) {
         this.stopName = stopName;
     }
 
-    public void updateReachableAt(Time time, Optional<LineName> line){
+    public void updateReachableAt(Time time, LineName line){
         if (time.time < reachableAt.get().time) {
             reachableAt = Optional.of(time);
-            reachableVia = line;
+            reachableVia = Optional.of(line);
         }
     }
 
     public Optional<Time> getReachableAt(){
-        return null;
+        return reachableAt;
+    }
+
+    @Override
+    public Optional<LineName> getReachableVia() {
+        return reachableVia;
     }
 
     public Vector<LineName> getLines(){
-
-        return null;
+        search();
+        return lines;
     }
 
     public StopName getName() {
         return stopName;
+    }
+
+    protected void search(){
+    }
+
+    public Integer getNumberOfLines(){
+        return lines.size();
+    }
+
+    public void setLines(Vector<LineName> lines){
+        this.lines = lines;
     }
 }

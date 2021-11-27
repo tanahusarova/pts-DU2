@@ -2,22 +2,37 @@ package connection;
 
 import java.util.Vector;
 
-public class Line {
-    private LineName lineName;
-    private Vector<Time> startingTimes;
-    private StopName firstStop;
+public class Line implements LineInterface{
+    protected LineName name;
+    protected Vector<Time> startingTimes;
+    protected Vector<LineSegment> lineSegments;
+    protected StopName firstStop;
 
-    public Line(LineName lineName, Vector<Time> startingTimes, StopName firstStop) {
-        this.lineName = lineName;
-        this.startingTimes = startingTimes;
-        this.firstStop = firstStop;
+    public Line() {
     }
 
     public Line(LineName lineName) {
-        this.lineName = lineName;
+        this.name = lineName;
+        startingTimes = new Vector<>();
+        lineSegments = new Vector<>();
+    }
+
+    public Line(LineName lineName, Vector<LineSegment> segments, Vector<Time> startingTimes) {
+        this.name = lineName;
+        this.startingTimes = startingTimes;
+        lineSegments = segments;
     }
 
     public LineName getName(){
-        return lineName;
+        return name;
+    }
+
+    @Override
+    public void updateReachable(StopName stop, Time time) {
+    }
+
+    @Override
+    public StopName updateCapacityAndGetPreviousStop(StopName stop, Time time) {
+        return null;
     }
 }

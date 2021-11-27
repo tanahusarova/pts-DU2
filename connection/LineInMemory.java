@@ -3,30 +3,20 @@ package connection;
 import java.util.Vector;
 import java.util.concurrent.ForkJoinTask;
 
-public class LineInMemory implements LineInterface{
-    private LineName name;
-    private Vector<Time> startingTimes;
-    private Vector<LineSegment> lineSegments;
-   // private StopInterface firstStop;
-    private StopName firstStop;
-
+public class LineInMemory extends Line{
 
     public LineInMemory(LineName name) {
-        this.name = name;
-        startingTimes = new Vector<>();
-        lineSegments = new Vector<>();
+        super(name);
     }
 
-    public LineInMemory(LineName name, Vector<LineSegment> lineSegments, StopInterface firstStop) {
-        this.name = name;
-        this.lineSegments = lineSegments;
-        this.firstStop = firstStop.getName();
+    public LineInMemory(LineName name, Vector<LineSegment> lineSegments, StopName firstStop, Vector<Time> startingTimes) {
+        super(name);
+        this.lineSegments = (Vector<LineSegment>) lineSegments.clone();
+        this.firstStop = firstStop;
+        this.startingTimes = (Vector<Time>) startingTimes.clone();
+
     }
 
-    @Override
-    public LineName getName() {
-        return name;
-    }
 
     @Override
     public void updateReachable(StopName stop, Time time) {
@@ -106,10 +96,19 @@ public class LineInMemory implements LineInterface{
     public StopName updateCapacityAndGetPreviousStop(StopName stop, Time time) {
         for (LineSegment ls : lineSegments){
             if (ls.getNextStop().getName() == stop){
-                ls.getNextStop().updateReachableAt(time, java.util.Optional.ofNullable(name));
+                ls.getNextStop().updateReachableAt(time, name);
                 ls.incrementCapacity(time);
             }
         }
         return null;
     }
+
+    public boolean contains(StopName stop){
+        if (firstStop == stop) return true;
+        for (int i = 0; i < lineSegments.size(); i++){
+            if (lineSegments.get(i).getNextStop().getName() == stop) return true;
+        }
+        return false;
+    }
+
 }
