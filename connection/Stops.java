@@ -1,11 +1,14 @@
 package connection;
 
+import javax.management.Query;
 import java.util.*;
 
 public class Stops {
     private Set<StopName> stopNames;
     private Set<StopInterface> stops;
     private Factory factory;
+    private Queue<Pair> earliestReachableAfter;
+    private boolean generateNew;
 
 /*
     public Stops(String fileName) {
@@ -17,7 +20,11 @@ public class Stops {
  */
 
     public Stops(Factory factory) {
+
         this.factory = factory;
+        generateNew = true;
+        this.earliestReachableAfter = new LinkedList<>();
+
     }
 
     public void setStops(Set<StopInterface> stops){
@@ -64,7 +71,30 @@ public class Stops {
         return null;
     }
 
+    private void search(Time time){
+        this.earliestReachableAfter.clear();
+        Set<StopName> used = new HashSet<>();
+        Time earliest = new Time(time.time);
+        StopName stopName = new StopName(null);
+
+        for (int i = 0)
+        {
+            for (StopInterface s : stops) {
+                if (s.getReachableAt().isPresent() && s.getReachableAt().get().time >= time.time
+                        && s.getReachableAt().get().time <= earliest.time && !used.contains(s.getName())) {
+
+                    stopName = s.getName();
+                    earliest = s.getReachableAt().get();
+                    this.earliestReachableAfter.add(new Pair<>(stopName, earliest));
+                    used.add(stopName);
+                }
+            }
+        }
+    }
+
+
     public Pair<StopName, Time> earliestReachableAfter(Time time){
+        if (generateNew) search(time);
         Time earliest = new Time(time.time);
         StopName stopName = new StopName(null);
         for (StopInterface s : stops){
@@ -76,6 +106,10 @@ public class Stops {
             }
         }
         return new Pair<>(stopName, earliest);
+    }
+
+    public void setGenerateNew(){
+        generateNew = true;
     }
 
 }

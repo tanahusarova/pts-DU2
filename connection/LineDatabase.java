@@ -1,15 +1,17 @@
 package connection;
 
-import java.util.Vector;
+import java.sql.Connection;
 
 public class LineDatabase implements LineInterface{
     private LineName name;
-    private String fileName;
+    private Connection connection;
 
-    public LineDatabase(LineName name, String fileName) {
-        this.name = name;
-        this.fileName = fileName;
+    public LineDatabase(Connection connection, LineName lineName) {
+        this.connection = connection;
+        this.name = lineName;
     }
+
+    private
 
     @Override
     public LineName getName() {

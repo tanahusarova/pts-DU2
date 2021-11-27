@@ -50,7 +50,8 @@ public class LineInMemory implements LineInterface{
         }
 
         while(i < lineSegments.size()){
-            lineSegments.get(i).nextStopAndUpdateReachable(tmpTime);
+            Tuple<Time, StopName, Boolean> tmp = lineSegments.get(i).nextStopAndUpdateReachable(tmpTime);
+            if(tmp.getC() == false) break;
         }
 
 
