@@ -25,6 +25,10 @@ public class LineSegment implements LineSegmentInterface{
     }
 
     public Tuple<Time, StopName, Boolean> nextStopAndUpdateReachable(Time time){
+        if (!numberOfPasengers.containsKey(time)) {
+            numberOfPasengers.put(time, 0);
+        }
+
         Boolean tmp = numberOfPasengers.get(time) < capacity;
 
         if (tmp == true) nextStop.updateReachableAt(new Time(time.time + timeToNextStop.time), lineName);

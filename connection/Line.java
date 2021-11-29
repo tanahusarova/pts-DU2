@@ -17,10 +17,11 @@ public class Line implements LineInterface{
         lineSegments = new Vector<>();
     }
 
-    public Line(LineName lineName, Vector<LineSegmentInterface> segments, Vector<Time> startingTimes) {
+    public Line(LineName lineName, Vector<LineSegmentInterface> segments, Vector<Time> startingTimes, StopName firstStop) {
         this.name = lineName;
         this.startingTimes = startingTimes;
         lineSegments = segments;
+        this.firstStop = firstStop;
     }
 
     public LineName getName(){
@@ -36,21 +37,28 @@ public class Line implements LineInterface{
         Time tmpTime = startingTimes.get(timeOrder);
         int i = 0;
 
-        while (tmpName != stop){
+        while (!tmpName.equals(stop)){
             Pair tmp = lineSegments.get(i).nextStop(tmpTime);
             tmpName = (StopName) tmp.getSecond();
             tmpTime = (Time) tmp.getFirst();
             i++;
         }
 
-        Integer timeDif = startingTimes.get(timeOrder).time - startingTimes.get(timeOrder - 1).time;
-        if (tmpTime.time - timeDif >= time.time ){
-            tmpTime = new Time(tmpTime.time - timeDif);
+
+        if (timeOrder > 0) {
+            Integer timeDif = startingTimes.get(timeOrder).time - startingTimes.get(timeOrder - 1).time;
+            if (tmpTime.time - timeDif >= time.time) {
+                tmpTime = new Time(tmpTime.time - timeDif);
+            }
         }
+
+        if (i > 0) lineSegments.get(i - 1).getNextStop().updateReachableAt(new Time(tmpTime.time), name);
 
         while(i < lineSegments.size()){
             Tuple<Time, StopName, Boolean> tmp = lineSegments.get(i).nextStopAndUpdateReachable(tmpTime);
+            tmpTime.time = tmp.getA().getTime();
             if(tmp.getC() == false) break;
+            i++;
         }
 
 
@@ -59,9 +67,9 @@ public class Line implements LineInterface{
 
     @Override
     public StopName updateCapacityAndGetPreviousStop(StopName stop, Time time) {
-        StopName previousStop = null;
+        StopName previousStop = firstStop;
         for (LineSegmentInterface ls : lineSegments){
-            if (ls.getNextStop().getName() == stop){
+            if (ls.getNextStop().getName().equals(stop)){
                 ls.getNextStop().updateReachableAt(time, name);
                 ls.incrementCapacity(time);
                 return previousStop;

@@ -7,7 +7,11 @@ public class LineSegmentInMemory extends LineSegment{
     }
 
     public void incrementCapacity(Time time){
-        numberOfPasengers.put(time, numberOfPasengers.get(time) + 1);
+
+        if (!numberOfPasengers.containsKey(time)) {
+            numberOfPasengers.put(time, 0);
+        }
+        else numberOfPasengers.put(time, numberOfPasengers.get(time) + 1);
     }
 
 }
