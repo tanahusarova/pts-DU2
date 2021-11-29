@@ -6,27 +6,23 @@ import java.util.*;
 
 public class ConnectionData {
     //po ktoru zastavku ktorou linkou
-    private List<Tuple<StopInterface, LineInterface, Time>> stops;
-    private Time finalTime;
+    private Stack<Tuple<StopName, LineName, Time>> stops;
 
     public ConnectionData() {
-        stops = new LinkedList<>();
+        stops = new Stack<>();
     }
 
-    public void addStop(Tuple<StopInterface, LineInterface, Time> newStop){
-        stops.add(newStop);
+    public void addStop(Tuple<StopName, LineName, Time> newStop){
+        stops.push(newStop);
     }
 
-    public void setFinalTime() {
-        this.finalTime = stops.get(stops.size() - 1).getC();
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        while(stops.isEmpty()){
+            sb.append(stops.pop());
+            sb.append(" ");
+        }
+        return sb.toString();
     }
-
-    public void remove(Tuple tuple){
-        stops.remove(tuple);
-    }
-
-    public Time getFinalTime() {
-        return finalTime;
-    }
-
 }

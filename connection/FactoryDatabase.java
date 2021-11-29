@@ -19,7 +19,10 @@ public class FactoryDatabase implements Factory {
         return new LineDatabase(connection, lineName);
     }
 
-
+    @Override
+    public LineSegmentInterface createLineSegment(Stop nextStop, TimeOffset timeToNextStop, int capacity, LineName lineName) {
+        return new LineSegmentDatabase(nextStop, timeToNextStop, capacity, lineName, connection);
+    }
 
 
 }

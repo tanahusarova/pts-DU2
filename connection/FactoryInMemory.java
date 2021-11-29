@@ -50,14 +50,19 @@ public class FactoryInMemory implements Factory {
 
     @Override
     public LineInterface createLine(LineName lineName) {
-        LineInterface line = null;
         for (LineInterface l: lines){
             if (l.getName() == lineName) {
-                line = l;
                 return l;
             }
         }
         return null;
     }
+
+    @Override
+    public LineSegmentInterface createLineSegment(Stop nextStop, TimeOffset timeToNextStop, int capacity, LineName lineName) {
+        return new LineSegmentInMemory(nextStop, timeToNextStop, capacity, lineName);
+
+    }
+
 
 }

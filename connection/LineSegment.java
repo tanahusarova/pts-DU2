@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class LineSegment {
+public class LineSegment implements LineSegmentInterface{
 //    private StopName from;
-    private StopInterface nextStop;
-    private TimeOffset timeToNextStop;
-    private int capacity;
-    private LineName lineName;
-    private Map<Time, Integer> numberOfPasengers;
+    protected StopInterface nextStop;
+    protected TimeOffset timeToNextStop;
+    protected int capacity;
+    protected LineName lineName;
+    protected Map<Time, Integer> numberOfPasengers;
 
     public LineSegment(Stop nextStop, TimeOffset timeToNextStop, int capacity, LineName lineName) {
         this.nextStop = nextStop;
@@ -38,7 +38,5 @@ public class LineSegment {
         return nextStop;
     }
 
-    public void incrementCapacity(Time time){
-        numberOfPasengers.put(time, numberOfPasengers.get(time) + 1);
-    }
+    public void incrementCapacity(Time time){}
 }

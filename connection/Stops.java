@@ -95,10 +95,10 @@ public class Stops {
         }
     }
 
-     */
 
 
-    public List<StopInterface> earliestReachableAfter(Time time, int count) {
+    /*
+    public List<StopInterface> earliestReachableAfter(Time time) {
         Time earliest = null;
         StopInterface tmpStop = null;
         List result = new ArrayList();
@@ -122,6 +122,28 @@ public class Stops {
         return result;
 
     }
+
+     */
+
+    public StopInterface earliestReachableAfter(Time time){
+        Time earliest = null;
+      //  StopName stopName = new StopName(null);
+        StopInterface result = null;
+
+        for (StopInterface s : stops){
+            if (s.getReachableAt().isPresent() && s.getReachableAt().get().time >= time.time
+                    && (earliest == null || s.getReachableAt().get().time <= earliest.time)){
+
+            //    stopName = s.getName();
+                earliest = s.getReachableAt().get();
+                result = s;
+            }
+        }
+
+        return result;
+    }
+
+
 
     public void clean(){
         for (StopInterface s: stops){
