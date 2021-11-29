@@ -1,7 +1,5 @@
 package connection;
 
-import java.util.ArrayList;
-//import java.util.LinkedList;
 import java.util.*;
 
 public class ConnectionData {

@@ -12,10 +12,11 @@ public class Stop implements StopInterface{
 
     public Stop(StopName stopName) {
         this.stopName = stopName;
+
     }
 
     public void updateReachableAt(Time time, LineName line){
-        if (time.time < reachableAt.get().time) {
+        if (reachableAt == null || time.time < reachableAt.get().time) {
             reachableAt = Optional.of(time);
             reachableVia = Optional.of(line);
         }
@@ -40,10 +41,6 @@ public class Stop implements StopInterface{
     }
 
     protected void search(){
-    }
-
-    public Integer getNumberOfLines(){
-        return lines.size();
     }
 
     public void setLines(Vector<LineName> lines){

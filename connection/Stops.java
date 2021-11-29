@@ -8,15 +8,6 @@ public class Stops {
     private Set<StopInterface> stops;
     private Factory factory;
 
-/*
-    public Stops(String fileName) {
-        this.stopNames = new HashSet<>();
-        this.stops = new HashSet<>();
-        factory = new FactoryDatabase(fileName);
-    }
-
- */
-
     public Stops(Set<StopName> stopNames, Set<StopInterface> stops) {
         this.stopNames = stopNames;
         this.stops = stops;
@@ -90,11 +81,9 @@ public class Stops {
     }
 
 
-
     public void clean(){
-        for (StopInterface s: stops){
-            s.updateReachableAt(null, null);
-        }
+        stops.clear();
+        stopNames.clear();
     }
 
 }

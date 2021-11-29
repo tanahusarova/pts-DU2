@@ -19,13 +19,4 @@ public class StopInMemory extends Stop{
 
 
 
-
-
-  /*  public Integer getNumberOfLines(){
-        return lines.size();
-    }
-
-   */
-
-
 }

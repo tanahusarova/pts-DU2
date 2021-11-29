@@ -57,7 +57,6 @@ public class Line implements LineInterface{
     }
 
 
-
     @Override
     public StopName updateCapacityAndGetPreviousStop(StopName stop, Time time) {
         StopName previousStop = null;

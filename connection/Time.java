@@ -7,4 +7,8 @@ public class Time {
         this.time = time;
     }
 
+    public Integer getTime(){
+        return time;
+    }
+
 }

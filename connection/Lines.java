@@ -15,8 +15,6 @@ public class Lines {
         this.factory = factory;
     }
 
-
-
     private LineInterface getLine(LineName lineName){
         LineInterface line = null;
         if (!lineNames.contains(lineName)) {
