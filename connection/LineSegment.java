@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class LineSegment implements LineSegmentInterface{
-//    private StopName from;
     protected StopInterface nextStop;
     protected TimeOffset timeToNextStop;
     protected int capacity;

@@ -8,20 +8,6 @@ public class FactoryInMemory implements Factory {
     private List<StopInterface> stops;
     private List<LineInterface> lines;
 
-   /* public FactoryInMemory() {
-    }
-
-    @Override
-    public StopInterface createStop(StopName stopName) {
-        return new StopInMemory(stopName);
-    }
-
-    @Override
-    public LineInterface createLine(LineName lineName) {
-        return new LineInMemory(lineName);
-    }
-
-    */
 
     public FactoryInMemory(List<StopInterface> stops, List<LineInterface> lines) {
         this.stops = stops;

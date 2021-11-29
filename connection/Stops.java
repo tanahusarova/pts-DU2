@@ -73,68 +73,14 @@ public class Stops {
         return new Pair(tmpStop.getReachableAt(), tmpStop.getReachableVia());
     }
 
-    /*
-    private void search(Time time){
-        this.earliestReachableAfter.clear();
-        Set<StopName> used = new HashSet<>();
-        Time earliest = new Time(time.time);
-        StopName stopName = new StopName(null);
-
-        for (int i = 0)
-        {
-            for (StopInterface s : stops) {
-                if (s.getReachableAt().isPresent() && s.getReachableAt().get().time >= time.time
-                        && s.getReachableAt().get().time <= earliest.time && !used.contains(s.getName())) {
-
-                    stopName = s.getName();
-                    earliest = s.getReachableAt().get();
-                    this.earliestReachableAfter.add(new Pair<>(stopName, earliest));
-                    used.add(stopName);
-                }
-            }
-        }
-    }
-
-
-
-    /*
-    public List<StopInterface> earliestReachableAfter(Time time) {
-        Time earliest = null;
-        StopInterface tmpStop = null;
-        List result = new ArrayList();
-
-        for (int i = 0; i < count; i++) {
-            for (StopInterface s : stops) {
-                if ((earliest == null || (s.getReachableAt().isPresent()
-                        && s.getReachableAt().get().time >= time.time
-                        && s.getReachableAt().get().time <= earliest.time))
-                        && !result.contains(s)) {
-
-                    tmpStop = s;
-                    earliest = s.getReachableAt().get();
-                }
-            }
-            result.add(tmpStop);
-            tmpStop = null;
-            earliest = null;
-        }
-
-        return result;
-
-    }
-
-     */
-
     public StopInterface earliestReachableAfter(Time time){
         Time earliest = null;
-      //  StopName stopName = new StopName(null);
         StopInterface result = null;
 
         for (StopInterface s : stops){
             if (s.getReachableAt().isPresent() && s.getReachableAt().get().time >= time.time
                     && (earliest == null || s.getReachableAt().get().time <= earliest.time)){
 
-            //    stopName = s.getName();
                 earliest = s.getReachableAt().get();
                 result = s;
             }

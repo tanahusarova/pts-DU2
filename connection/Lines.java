@@ -16,18 +16,6 @@ public class Lines {
     }
 
 
- /*
-
-    public void setLines(Set<LineInterface> lines){
-        this.lines.clear();
-        this.lines.add((LineInterface) lines);
-        this.lineNames.clear();
-        for (LineInterface l : lines){
-            lineNames.add(l.getName());
-        }
-    }
-
-  */
 
     private LineInterface getLine(LineName lineName){
         LineInterface line = null;

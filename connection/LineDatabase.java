@@ -1,16 +1,13 @@
 package connection;
 
-import javax.net.ssl.ExtendedSSLSession;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
-//import org.hibernate.Session;
 
 
 public class LineDatabase extends Line{
- //   private Session connection;
     private Connection connection;
 
 
@@ -104,60 +101,5 @@ public class LineDatabase extends Line{
 
     }
 
-    ///////dorobit increment capacity
-
-    /*
-
-    @Override
-    public StopName updateCapacityAndGetPreviousStop(StopName stop, Time time) {
-        StopName previousStop = null;
-        for (LineSegmentInterface ls : lineSegments){
-            if (ls.getNextStop().getName() == stop){
-                ls.getNextStop().updateReachableAt(time, name);
-                ls.incrementCapacity(time);
-                return previousStop;
-            }
-            previousStop = ls.getNextStop().getName();
-        }
-        return null;
-    }
-
-
-    String sql = "UPDATE warehouses SET name = ? , "
-                + "capacity = ? "
-                + "WHERE id = ?";
-
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            // set the corresponding param
-            pstmt.setString(1, name);
-            pstmt.setDouble(2, capacity);
-            pstmt.setInt(3, id);
-            // update
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-     */
-
-
-    /*
-    public StopName updateCapacityAndGetPreviousStop(StopName stop, Time time) {
-        StopName previousStop = null;
-        for (LineSegment ls : lineSegments){
-            if (ls.getNextStop().getName() == stop){
-                ls.getNextStop().updateReachableAt(time, name);
-                ls.incrementCapacity(time);
-                return previousStop;
-            }
-            previousStop = ls.getNextStop().getName();
-        }
-        return null;
-    }
-
-     */
 
 }
