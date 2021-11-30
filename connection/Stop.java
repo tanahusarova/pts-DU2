@@ -12,13 +12,16 @@ public class Stop implements StopInterface{
 
     public Stop(StopName stopName) {
         this.stopName = stopName;
+        reachableAt = Optional.ofNullable(null);
+        reachableVia = Optional.ofNullable(null);
 
     }
 
     public void updateReachableAt(Time time, LineName line){
-        if (reachableAt == null || time.time < reachableAt.get().time) {
+        if (!reachableAt.isPresent() || time.time < reachableAt.get().time) {
             reachableAt = Optional.of(time);
-            reachableVia = Optional.of(line);
+            if (line != null)
+                reachableVia = Optional.of(line);
         }
     }
 

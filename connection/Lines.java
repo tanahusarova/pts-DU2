@@ -15,6 +15,11 @@ public class Lines {
         this.factory = factory;
     }
 
+    public Lines(Set<LineInterface> lines, Set<LineName> lineNames){
+        this.lines = lines;
+        this.lineNames = lineNames;
+    }
+
     private LineInterface getLine(LineName lineName){
         LineInterface line = null;
         if (!lineNames.contains(lineName)) {
@@ -24,7 +29,7 @@ public class Lines {
         }
         else {
             for (LineInterface l : lines) {
-                if (l.getName() == lineName) line = l;
+                if (l.getName().equals(lineName)) line = l;
             }
         }
         return line;
@@ -53,10 +58,12 @@ public class Lines {
 
     }
 
- //not sure
     public void clean(){
         lines.clear();
         lineNames.clear();
     }
 
+    public Set<LineInterface> getLines() {
+        return lines;
+    }
 }

@@ -1,5 +1,6 @@
 package connection;
 
+import java.util.HashSet;
 import java.util.Vector;
 
 public class Line implements LineInterface{
@@ -8,7 +9,8 @@ public class Line implements LineInterface{
     protected Vector<LineSegmentInterface> lineSegments;
     protected StopName firstStop;
 
-    public Line() {
+    public Line(LineName ln1, Vector<LineSegmentInterface> lineSegments1) {
+        name = ln1;
     }
 
     public Line(LineName lineName) {
@@ -79,4 +81,15 @@ public class Line implements LineInterface{
         return null;
     }
 
+    @Override
+    public boolean contains(StopName stop) {
+        if (firstStop == stop) return true;
+        for (int i = 0; i < lineSegments.size(); i++){
+            if (lineSegments.get(i).getNextStop().getName() == stop) return true;
+        }
+        return false;
+    }
+
 }
+
+

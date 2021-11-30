@@ -11,6 +11,10 @@ public class ConnectionSearch {
         stops = new Stops(factory);
     }
 
+    public ConnectionSearch(Lines lines, Stops stops){
+        this.lines = lines;
+        this.stops = stops;
+    }
 
     public ConnectionData search(StopName from, StopName to, Time time){
         ConnectionData result = new ConnectionData();
@@ -19,7 +23,8 @@ public class ConnectionSearch {
         Time tmpTime = time;
         StopInterface tmp;
 
-        while(tmpStopNameF != to) {
+        while(!tmpStopNameF.equals(to)) {
+            //doplnit aktualizaciu stopiek v stopkach
             lines.updateReachable(stops.getLines(tmpStopNameF), tmpStopNameF, tmpTime);
             tmp = stops.earliestReachableAfter(tmpTime);
             tmpTime = tmp.getReachableAt().get();
@@ -33,8 +38,6 @@ public class ConnectionSearch {
             result.addStop(new Tuple(tmpStopNameT, time_line.getSecond(), time_line.getFirst()));
             tmpStopNameT = lines.updateCapacityAndGetPreviousStop(time_line.getSecond(), tmpStopNameT, time_line.getFirst());
         }
-
-
 
         stops.clean();
         lines.clean();

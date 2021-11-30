@@ -18,7 +18,7 @@ public class FactoryInMemory implements Factory {
     public StopInterface createStop(StopName stopName) {
         StopInterface stop = null;
         for (StopInterface s: stops){
-            if (s.getName() == stopName) {
+            if (s.getName().equals(stopName)) {
                 stop = s;
                 break;
             }
@@ -27,17 +27,17 @@ public class FactoryInMemory implements Factory {
         Vector<LineName> linesContStop = new Vector();
 
         for (LineInterface l : lines){
-            if (((LineInMemory) l).contains(stopName)) linesContStop.add(l.getName());
+            if (l.contains(stopName)) linesContStop.add(l.getName());
         }
 
         stop.setLines(linesContStop);
-        return null;
+        return stop;
     }
 
     @Override
     public LineInterface createLine(LineName lineName) {
         for (LineInterface l: lines){
-            if (l.getName() == lineName) {
+            if (l.getName().equals(lineName)) {
                 return l;
             }
         }

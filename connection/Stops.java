@@ -69,7 +69,7 @@ public class Stops {
         StopInterface result = null;
 
         for (StopInterface s : stops){
-            if (s.getReachableAt().isPresent() && s.getReachableAt().get().time >= time.time
+            if (s.getReachableAt().isPresent() && s.getReachableAt().get().time > time.time
                     && (earliest == null || s.getReachableAt().get().time <= earliest.time)){
 
                 earliest = s.getReachableAt().get();
@@ -86,4 +86,7 @@ public class Stops {
         stopNames.clear();
     }
 
+    public Set<StopInterface> getStops() {
+        return stops;
+    }
 }
