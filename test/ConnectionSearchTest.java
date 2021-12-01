@@ -1,10 +1,8 @@
 package test;
 
-
 import connection.*;
 import org.junit.Test;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -39,7 +37,6 @@ public class ConnectionSearchTest {
         Stop s6 = new Stop(new StopName("Rádiová"));
         Stop s7 = new Stop(new StopName("Technická"));
 
-
         LineName ln1 = new LineName("39");
         LineName ln2 = new LineName("58");
 
@@ -58,7 +55,7 @@ public class ConnectionSearchTest {
         }};
 
         LineInterface l1 = new Line(ln1, lineSegments1, times1, s0.getName());
-        LineInterface l2 = new Line(ln2, lineSegments2, times1, s1.getName());
+        LineInterface l2 = new Line(ln2, lineSegments2, times2, s1.getName());
 
         lines = new LinkedList<>(){{
             add(l1);
