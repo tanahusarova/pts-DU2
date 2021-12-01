@@ -18,7 +18,7 @@ public class Stop implements StopInterface{
     }
 
     public void updateReachableAt(Time time, LineName line){
-        if (!reachableAt.isPresent() || time.time < reachableAt.get().time) {
+        if (!reachableAt.isPresent() || time.time < reachableAt.get().getTime()) {
             reachableAt = Optional.of(time);
             if (line != null)
                 reachableVia = Optional.of(line);

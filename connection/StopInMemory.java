@@ -17,6 +17,4 @@ public class StopInMemory extends Stop{
     public void search(){
     }
 
-
-
 }

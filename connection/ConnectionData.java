@@ -14,13 +14,15 @@ public class ConnectionData {
         stops.push(newStop);
     }
 
-    @Override
-    public String toString() {
+
+    public String write() {
         StringBuilder sb = new StringBuilder();
-        while(stops.isEmpty()){
-            sb.append(stops.pop());
-            sb.append(" ");
+        while(!stops.isEmpty()){
+            sb.append(stops.pop().toString("Názov zastávky: ", "Názov linky: ", "čas: "));
+            sb.append("\n");
         }
         return sb.toString();
     }
+
+
 }

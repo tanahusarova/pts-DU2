@@ -1,14 +1,18 @@
 package connection;
 
+import java.util.Vector;
+
 public class ConnectionSearch {
     private Lines lines;
     private Stops stops;
     private Factory factory;
+    private Update update;
 
     public ConnectionSearch(Factory factory) {
         this.factory = factory;
         lines = new Lines(factory);
         stops = new Stops(factory);
+        update = new Update(this.stops, this.lines);
     }
 
     public ConnectionSearch(Lines lines, Stops stops){
@@ -25,7 +29,9 @@ public class ConnectionSearch {
 
         while(!tmpStopNameF.equals(to)) {
             //doplnit aktualizaciu stopiek v stopkach
-            lines.updateReachable(stops.getLines(tmpStopNameF), tmpStopNameF, tmpTime);
+            Vector tmpLines = stops.getLines(tmpStopNameF);
+            update.addStops(lines.update(tmpLines, tmpStopNameF, tmpTime));
+            lines.updateReachable(tmpLines, tmpStopNameF, tmpTime);
             tmp = stops.earliestReachableAfter(tmpTime);
             tmpTime = tmp.getReachableAt().get();
             tmpStopNameF = tmp.getName();

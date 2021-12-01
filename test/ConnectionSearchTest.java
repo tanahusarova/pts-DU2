@@ -36,7 +36,6 @@ public class ConnectionSearchTest {
         Stop s2 = new Stop(new StopName("Zoo"));
         Stop s3 = new Stop(new StopName("Lanfranconi"));
         Stop s4 = new Stop(new StopName("Kráľovské údolie"));
- //       Stop s5 = new Stop(new StopName("Lanfranconi"));
         Stop s6 = new Stop(new StopName("Rádiová"));
         Stop s7 = new Stop(new StopName("Technická"));
 
@@ -95,7 +94,6 @@ public class ConnectionSearchTest {
             add(s2);
             add(s3);
             add(s4);
-//            add(s5);
             add(s6);
             add(s7);
         }};
@@ -103,6 +101,6 @@ public class ConnectionSearchTest {
         Factory factory = new FactoryInMemory(stops, lines);
         cs = new ConnectionSearch(factory);
         ConnectionData result = cs.search(s0.getName(), s7.getName(), new Time(15));
-        System.out.println(result.toString());
+        System.out.println(result.write());
     }
 }

@@ -22,4 +22,9 @@ public class Tuple <E, T, K>{
     public K getC() {
         return c;
     }
+
+    public String toString(String A, String B, String C) {
+        return A + a.toString() + " " + B + b.toString() +
+                " " + C + c.toString();
+    }
 }

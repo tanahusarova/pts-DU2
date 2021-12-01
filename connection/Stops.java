@@ -20,13 +20,11 @@ public class Stops {
 
     }
 
-    public void setStops(Set<StopInterface> stops){
-        this.stops.clear();
-        this.stops.add((StopInterface) stops);
-        this.stopNames.clear();
-        for (StopInterface s : stops){
+    public void addStops(List<StopInterface> newStops){
+        for (StopInterface s : newStops){
             stopNames.add(s.getName());
         }
+        this.stops.addAll(newStops);
     }
 
     private StopInterface getStop(StopName stopName){
@@ -61,7 +59,7 @@ public class Stops {
 
     public Pair<Time, LineName> getReachableAt(StopName stop){
         StopInterface tmpStop = getStop(stop);
-        return new Pair(tmpStop.getReachableAt(), tmpStop.getReachableVia());
+        return new Pair(tmpStop.getReachableAt().get(), tmpStop.getReachableVia().get());
     }
 
     public StopInterface earliestReachableAfter(Time time){

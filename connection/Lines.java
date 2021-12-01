@@ -1,8 +1,6 @@
 package connection;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Vector;
+import java.util.*;
 
 public class Lines {
     private Set<LineInterface> lines;
@@ -46,10 +44,22 @@ public class Lines {
 
     }
 
+    public List<StopInterface> update(Vector<LineName> lines, StopName stop, Time time){
+        ArrayList<StopInterface> result = new ArrayList<>();
+
+        for (LineName l : lines) {
+            LineInterface line = getLine(l);
+            result.addAll(line.update(stop, time));
+        }
+
+        return result;
+
+    }
+
     public StopName updateCapacityAndGetPreviousStop(LineName line, StopName stop, Time time){
         LineInterface tmpLine = null;
         for (LineInterface l : lines){
-            if (l.getName() == line){
+            if (l.getName().equals(line)){
                 tmpLine = l;
                 break;
             }

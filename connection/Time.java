@@ -11,4 +11,8 @@ public class Time {
         return time;
     }
 
+    @Override
+    public String toString() {
+        return time.toString();
+    }
 }

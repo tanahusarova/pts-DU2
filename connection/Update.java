@@ -1,6 +1,7 @@
 package connection;
 
 
+import java.util.List;
 import java.util.Vector;
 
 public class Update {
@@ -13,8 +14,8 @@ public class Update {
     }
     //updateReachable(stops.getLines(tmpStopNameF), tmpStopNameF, tmpTime);
 
-    public void update(Vector<LineInterface> lines, StopName stopName){
-
+    public void addStops(List<StopInterface> stops){
+        this.stops.addStops(stops);
     }
 
 }
