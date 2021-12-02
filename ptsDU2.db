@@ -1,0 +1,18 @@
+CREATE TABLE lines (
+	lineId integer NOT NULL,
+	lineName varchar(50) NOT NULL,
+	lineStartStop varchar(50) NOT NULL,
+	lineStartTime time NOT NULL,
+)
+
+CREATE TABLE linesStops (
+	lineId integer NOT NULL,
+	stopName varchar(50) NOT NULL,
+	stopOrder integer NOT NULL,
+	stopTimeDiff time NOT NULL,
+	stopTime time NOT NULL,
+	numberOfPasengers integer,
+	capacity integer NOT NULL
+	
+)
+
