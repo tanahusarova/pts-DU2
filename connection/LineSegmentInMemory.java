@@ -11,7 +11,8 @@ public class LineSegmentInMemory extends LineSegment{
         if (!numberOfPasengers.containsKey(time)) {
             numberOfPasengers.put(time, 0);
         }
-        else numberOfPasengers.put(time, numberOfPasengers.get(time) + 1);
+        
+        numberOfPasengers.put(time, numberOfPasengers.get(time) + 1);
     }
 
 }
