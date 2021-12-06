@@ -4,6 +4,8 @@ package connection;
 import java.util.List;
 import java.util.Vector;
 
+//tato trieda sa mi nezda velmi potrebna ale mozno nieco prehliadam :D
+//lebo sa mi zda ze aj tak len vola metodu triedy Stops
 public class Update {
     private Stops stops;
     private Lines lines;

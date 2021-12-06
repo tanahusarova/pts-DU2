@@ -8,6 +8,9 @@ public class ConnectionSearch {
     private Factory factory;
     private Update update;
 
+    //podla mna by tu lepsie to injectnut ze tie stops a lines das ako argument konstruktora
+    //je asi lepsie to mat ako dependency injection
+    //ale v mojej review si to zas videla opacne ty takze neviem co je lepsie :D
     public ConnectionSearch(Factory factory) {
         this.factory = factory;
         lines = new Lines(factory);

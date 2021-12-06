@@ -12,6 +12,8 @@ public class LineInMemory extends Line{
 
     public LineInMemory(LineName name, Vector<LineSegmentInMemory> lineSegments, StopName firstStop, Vector<Time> startingTimes) {
         super(name);
+        //tu nebolo lepsie len pouzit kontruktor s parametrom? potom by tam nemusel byt ten typecast
+        //aj ked neviem ako to funguje pri vectore
         this.lineSegments = (Vector<LineSegmentInterface>) lineSegments.clone();
         this.firstStop = firstStop;
         this.startingTimes = (Vector<Time>) startingTimes.clone();

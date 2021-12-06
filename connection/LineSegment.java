@@ -21,6 +21,7 @@ public class LineSegment implements LineSegmentInterface{
 
 
     public Pair<Time, StopName> nextStop(Time time){
+        //opat intellij na neparametrizovany Pair :D
         return new Pair(new Time(time.time + timeToNextStop.time), nextStop.getName());
     }
 
@@ -29,6 +30,7 @@ public class LineSegment implements LineSegmentInterface{
             numberOfPasengers.put(time, 0);
         }
 
+        //ja by som to cele supol rovno do toho ifu namiesto tmp, ked tak uz by som dal aspon pom :D
         Boolean tmp = numberOfPasengers.get(time) < capacity;
 
         if (tmp == true) nextStop.updateReachableAt(new Time(time.time + timeToNextStop.time), lineName);
@@ -41,5 +43,6 @@ public class LineSegment implements LineSegmentInterface{
         return nextStop;
     }
 
+    //tato metoda by tu asi nemusela byt ked tak tato trieda by mohla byt abstraktna
     public void incrementCapacity(Time time){}
 }

@@ -40,6 +40,7 @@ public class Lines {
             line.updateReachable(stop, time);
         }
 
+        //toto tu asi netreba :D
         return;
 
     }

@@ -2,6 +2,7 @@ CREATE TABLE lines (
 	lineId integer NOT NULL,
 	lineName varchar(50) NOT NULL,
 	lineStartStop varchar(50) NOT NULL,
+	/* co ked je tych startTimeov viac  */
 	lineStartTime time NOT NULL,
 )
 

@@ -11,6 +11,7 @@ public class Line implements LineInterface{
     protected Vector<LineSegmentInterface> lineSegments;
     protected StopName firstStop;
 
+    //tieto dva konstruktory su potrebne?
     public Line(LineName ln1, Vector<LineSegmentInterface> lineSegments1) {
         name = ln1;
     }
@@ -42,6 +43,8 @@ public class Line implements LineInterface{
         int i = 0;
 
         while (!tmpName.equals(stop)){
+            //tu mi intellij vypisuje ze by to nebolo zle parametrizovat potom by asi ani nebolo treba pretypovavat tie Time a StopName
+            //mas to tak na viacerych miestach asi to aj tak zbehne ale asi by bolo fajn to tam mat
             Pair tmp = lineSegments.get(i).nextStop(tmpTime);
             tmpName = (StopName) tmp.getSecond();
             tmpTime = (Time) tmp.getFirst();
