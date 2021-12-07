@@ -40,4 +40,5 @@ public class LineSegment implements LineSegmentInterface{
         return nextStop;
     }
 
+    
 }
