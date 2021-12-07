@@ -17,6 +17,8 @@ public class FactoryInMemory implements Factory {
     //nemala by factory vytvarat nove instancie? T.j return new Stop(...)
     //akoze trieda je v pohode len to asi nie je factory
     //ja by som tieto operacie zahrnul do samotnych stops a lines, napriklad stops.getStopByName() ale samozrejme 100 ludi 100 chuti
+    
+    
     @Override
     public StopInterface createStop(StopName stopName) {
         StopInterface stop = null;
@@ -52,6 +54,8 @@ public class FactoryInMemory implements Factory {
     //lebo sa mi zda zvlastne ze uz dostanes v konstruktore vytvorene linky ktore uz obsahuju svoje linseSegmenty
     //cize potom by tato metoda bola zbytocna ale neviem ci to v zadani nebolo myslene tak ze tie stopky a linky mas vytvorit
     //teda aspon ja som to tak pochopil
+    
+    //E: zda sa mi ze to ani nepouzivam v hlavnom kode, ale niekde pri testoch, nech mam vsetko vo factories pokope 
     @Override
     public LineSegmentInterface createLineSegment(Stop nextStop, TimeOffset timeToNextStop, int capacity, LineName lineName) {
         return new LineSegmentInMemory(nextStop, timeToNextStop, capacity, lineName);
