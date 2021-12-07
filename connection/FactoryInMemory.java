@@ -62,5 +62,4 @@ public class FactoryInMemory implements Factory {
 
     }
 
-
 }
