@@ -17,7 +17,6 @@ public class Update {
         this.stops = stops;
         this.lines = lines;
     }
-    //updateReachable(stops.getLines(tmpStopNameF), tmpStopNameF, tmpTime);
 
     public void addStops(List<StopInterface> stops){
         this.stops.addStops(stops);
