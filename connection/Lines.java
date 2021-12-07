@@ -40,9 +40,6 @@ public class Lines {
             line.updateReachable(stop, time);
         }
 
-        //toto tu asi netreba :D
-        return;
-
     }
 
     public List<StopInterface> update(Vector<LineName> lines, StopName stop, Time time){
