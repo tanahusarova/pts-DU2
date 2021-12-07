@@ -3,6 +3,7 @@ CREATE TABLE lines (
 	lineName varchar(50) NOT NULL,
 	lineStartStop varchar(50) NOT NULL,
 	/* co ked je tych startTimeov viac  */
+	--ja mam kazdu linku tolkokrat v tabulke kolko je startimov, ze kazda cesta je brana ako iny zaznam v tabulke
 	lineStartTime time NOT NULL,
 )
 
