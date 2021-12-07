@@ -13,6 +13,7 @@ public class StopInMemory extends Stop{
 
     public StopInMemory(StopName stopName) {
         super(stopName);
+        this.lines = lines;
     }
 
     @Override

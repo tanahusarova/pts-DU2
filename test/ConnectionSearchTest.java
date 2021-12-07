@@ -96,8 +96,11 @@ public class ConnectionSearchTest {
         }};
 
         Factory factory = new FactoryInMemory(stops, lines);
+
         cs = new ConnectionSearch(factory);
         ConnectionData result = cs.search(s0.getName(), s7.getName(), new Time(15));
         System.out.println(result.write());
+
+
     }
 }

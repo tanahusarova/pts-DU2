@@ -10,13 +10,13 @@ public class LineInMemory extends Line{
         super(name);
     }
 
-    public LineInMemory(LineName name, Vector<LineSegmentInMemory> lineSegments, StopName firstStop, Vector<Time> startingTimes) {
+    public LineInMemory(LineName name, Vector<LineSegmentInterface> lineSegments, StopName firstStop, Vector<Time> startingTimes) {
         super(name);
         //tu nebolo lepsie len pouzit kontruktor s parametrom? potom by tam nemusel byt ten typecast
         //aj ked neviem ako to funguje pri vectore
-        this.lineSegments = (Vector<LineSegmentInterface>) lineSegments.clone();
+        this.lineSegments = lineSegments;
         this.firstStop = firstStop;
-        this.startingTimes = (Vector<Time>) startingTimes.clone();
+        this.startingTimes = startingTimes;
 
     }
 
