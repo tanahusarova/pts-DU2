@@ -6,6 +6,9 @@ import java.util.Vector;
 
 //tato trieda sa mi nezda velmi potrebna ale mozno nieco prehliadam :D
 //lebo sa mi zda ze aj tak len vola metodu triedy Stops
+
+//mne sa same naktualizovali stopky v stops potom co boli updatnute v reachable, takze tymto ich tam poslem
+
 public class Update {
     private Stops stops;
     private Lines lines;
