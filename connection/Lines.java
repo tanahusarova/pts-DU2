@@ -73,5 +73,6 @@ public class Lines {
 
     public Set<LineInterface> getLines() {
         return lines;
+       
     }
 }
