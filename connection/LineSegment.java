@@ -21,6 +21,7 @@ public class LineSegment implements LineSegmentInterface{
 
 
     public Pair<Time, StopName> nextStop(Time time){
+        //opat intellij na neparametrizovany Pair :D
         return new Pair(new Time(time.time + timeToNextStop.time), nextStop.getName());
     }
 
@@ -29,11 +30,9 @@ public class LineSegment implements LineSegmentInterface{
             numberOfPasengers.put(time, 0);
         }
 
-        Boolean tmp = numberOfPasengers.get(time) < capacity;
+        if (numberOfPasengers.get(time) < capacity) nextStop.updateReachableAt(new Time(time.time + timeToNextStop.time), lineName);
 
-        if (tmp == true) nextStop.updateReachableAt(new Time(time.time + timeToNextStop.time), lineName);
-
-        return new Tuple<>(new Time(time.time + timeToNextStop.time), nextStop.getName(), tmp);
+        return new Tuple<>(new Time(time.time + timeToNextStop.time), nextStop.getName(), numberOfPasengers.get(time) < capacity);
 
     }
 
@@ -41,5 +40,4 @@ public class LineSegment implements LineSegmentInterface{
         return nextStop;
     }
 
-    public void incrementCapacity(Time time){}
 }

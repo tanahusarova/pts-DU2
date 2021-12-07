@@ -1,5 +1,7 @@
 package connection;
 
+//niekde som videl ze ked nejaku classu pouzivas ako key do hashmap tak by mal overridenut metodu hashcode a equals
+//intellij ich vie same vygenerovat
 public class Time {
     Integer time;
 

@@ -18,6 +18,7 @@ public class LineSegmentDatabase extends LineSegment{
                 + "WHERE stopName = " + nextStop.getName().toString() +
                 "AND stopTime = " + time.time.toString();
 
+        //musi to priradenie connection byt v try blocku? ale vlastne nic to nepokazi
         try (Connection conn = connection;
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
